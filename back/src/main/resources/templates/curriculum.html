@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Currículo</title>
+
+    <style>
+        @page {
+            size: A4;
+            margin: 20mm;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #222;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .resume {
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #222;
+            padding-bottom: 15px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            text-transform: uppercase;
+        }
+
+        .contact {
+            margin-top: 8px;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section h2 {
+            font-size: 16px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 4px;
+            margin-bottom: 10px;
+        }
+
+        .item {
+            margin-bottom: 12px;
+        }
+
+        .item-title {
+            font-weight: bold;
+        }
+
+        .item-subtitle {
+            color: #555;
+            font-size: 13px;
+        }
+
+        ul {
+            margin: 6px 0 0 20px;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+<div class="resume">
+
+    <div class="header">
+        <h1 th:text="${fullName}">Nome Completo</h1>
+
+        <div class="contact">
+            <span th:text="${phone}">(00) 00000-0000</span> |
+            <span th:text="${city}">Cidade - Estado</span> |
+            <span th:text="${age}">Idade</span>
+        </div>
+    </div>
+
+    <div class="section" th:if="${professionalSummary != null}">
+        <h2>Resumo Profissional</h2>
+        <p th:text="${professionalSummary}">
+            Breve resumo profissional.
+        </p>
+    </div>
+
+    <div class="section" th:if="${objective != null}">
+        <h2>Objetivo</h2>
+        <p th:text="${objective}">
+            Objetivo profissional.
+        </p>
+    </div>
+
+    <div class="section" th:if="${workExperiences != null}">
+        <h2>Experiência Profissional</h2>
+
+        <div class="item" th:each="experience : ${workExperiences}">
+            <div class="item-title" th:text="${experience.jobTitle}">
+                Cargo
+            </div>
+
+            <div class="item-subtitle">
+                <span th:text="${experience.companyName}">Empresa</span> |
+                <span th:text="${experience.startDate}">Início</span> -
+                <span th:text="${experience.endDate}">Fim</span>
+            </div>
+
+            <p th:text="${experience.description}">
+                Descrição da experiência.
+            </p>
+        </div>
+    </div>
+
+    <div class="section" th:if="${educations != null}">
+        <h2>Formação Acadêmica</h2>
+
+        <div class="item" th:each="education : ${educations}">
+            <div class="item-title" th:text="${education.courseName}">
+                Curso
+            </div>
+
+            <div class="item-subtitle">
+                <span th:text="${education.institutionName}">Instituição</span> |
+                <span th:text="${education.startDate}">Início</span> -
+                <span th:text="${education.endDate}">Fim</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" th:if="${skills != null}">
+        <h2>Habilidades</h2>
+
+        <ul>
+            <li th:each="skill : ${skills}" th:text="${skill}">
+                Habilidade
+            </li>
+        </ul>
+    </div>
+
+    <div class="section" th:if="${courses != null}">
+        <h2>Cursos e Certificações</h2>
+
+        <div class="item" th:each="course : ${courses}">
+            <div class="item-title" th:text="${course.name}">
+                Nome do curso
+            </div>
+
+            <div class="item-subtitle">
+                <span th:text="${course.institutionName}">Instituição</span>
+                <span th:if="${course.completionDate != null}"> | </span>
+                <span th:if="${course.completionDate != null}" th:text="${course.completionDate}">
+                    Data
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" th:if="${languages != null}">
+        <h2>Idiomas</h2>
+
+        <ul>
+            <li th:each="language : ${languages}">
+                <span th:text="${language.name}">Idioma</span> -
+                <span th:text="${language.level}">Nível</span>
+            </li>
+        </ul>
+    </div>
+
+</div>
+</body>
+</html>
