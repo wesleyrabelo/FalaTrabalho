@@ -43,3 +43,4 @@ Este diretorio contem a API do FalaTrabalho, responsavel por receber audios do a
 - Evite acoplar diretamente controllers a `whisper.cpp`, `llama.cpp` ou geradores de PDF; encapsule essas chamadas em services/adapters.
 - Documente endpoints novos no Swagger/OpenAPI quando fizer sentido.
 - Ao mexer no backend, rode `mvn test` quando houver mudanca de comportamento ou integracao relevante.
+- O idioma do git commit deve ser pt-br.
