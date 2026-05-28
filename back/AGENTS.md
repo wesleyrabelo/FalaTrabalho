@@ -32,7 +32,7 @@ Este diretorio contem a API do FalaTrabalho, responsavel por receber audios do a
 
 ## Geracao de curriculo
 
-- Use templates HTML para estruturar o curriculo.
+- Use o template curriculum.html para estruturar o curriculo.
 - A geracao de PDF deve partir do HTML preenchido.
 - A tecnologia prevista para PDF e OpenPDF.
 
