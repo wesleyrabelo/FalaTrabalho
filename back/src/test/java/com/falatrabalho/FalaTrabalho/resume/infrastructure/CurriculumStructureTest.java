@@ -64,6 +64,18 @@ class CurriculumStructureTest {
 	}
 
 	@Test
+	void shouldEscapeHtmlFromProfessionalSummary() {
+		String html = generator.generate(CurriculumDataFixture.withHtmlInProfessionalSummary()).content();
+
+		assertFalse(html.contains("<script>alert('xss')</script>"));
+		assertFalse(html.contains("<b>Auxiliar Administrativo</b>"));
+		assertEquals("""
+				<h2 class="professional-summary">Resumo Profissional</h2>
+				<p>Profissional com experiencia. &lt;script&gt;alert(&#39;xss&#39;)&lt;/script&gt; Tambem atuou como &lt;b&gt;Auxiliar Administrativo&lt;/b&gt;.</p>
+				""".stripTrailing(), HtmlSections.professionalSummary(html).stripTrailing());
+	}
+
+	@Test
 	void shouldGenerateEducationListHtmlStructure() {
 		assertEquals("""
 				<h2 class="educational-background">Forma&ccedil;&atilde;o</h2>

@@ -46,6 +46,17 @@ public final class CurriculumDataFixture {
 				qualities());
 	}
 
+	public static CurriculumData withHtmlInProfessionalSummary() {
+		return new CurriculumData(
+				personalInfo(),
+				professionalGoal(),
+				"Profissional com experiencia. <script>alert('xss')</script> Tambem atuou como <b>Auxiliar Administrativo</b>.",
+				education(),
+				workExperience(),
+				complementaryCourses(),
+				qualities());
+	}
+
 	public static CurriculumData withNullEducation() {
 		return new CurriculumData(
 				personalInfo(),
