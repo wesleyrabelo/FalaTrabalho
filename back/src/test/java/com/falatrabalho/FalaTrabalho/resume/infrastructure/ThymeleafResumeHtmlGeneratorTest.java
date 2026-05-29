@@ -32,7 +32,6 @@ class ThymeleafResumeHtmlGeneratorTest {
 				        <span class="marital-status">Solteiro</span><span>, </span><span class="age">28 anos</span>
 				    </p>
 				    <p class="phone-number">Telefone: (11) 99999-9999</p>
-				    <p class="email">E-mail: joao@email.com</p>
 				</div>
 				""".stripTrailing(), personalInfoHtml().stripTrailing());
 	}
@@ -185,8 +184,7 @@ class ThymeleafResumeHtmlGeneratorTest {
 
 	private static CurriculumData completeCurriculumData() {
 		return new CurriculumData(
-				new PersonalInfo("João da Silva", "São Paulo", "SP", "Solteiro", 28, "(11) 99999-9999",
-						"joao@email.com"),
+				new PersonalInfo("João da Silva", "São Paulo", "SP", "Solteiro", 28, "(11) 99999-9999"),
 				"Atuar como auxiliar administrativo",
 				"Profissional com experiência em atendimento e organização de documentos.",
 				List.of(

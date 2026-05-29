@@ -145,8 +145,7 @@ class CurriculumDataTest {
 	}
 
 	private static PersonalInfo personalInfo() {
-		return new PersonalInfo("Joao da Silva", "Sao Paulo", "SP", "Solteiro", 28, "(11) 99999-9999",
-				"joao@email.com");
+		return new PersonalInfo("Joao da Silva", "Sao Paulo", "SP", "Solteiro", 28, "(11) 99999-9999");
 	}
 
 	private static Education education() {

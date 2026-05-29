@@ -68,10 +68,9 @@
         <span class="city" th:text="${curriculumData.personalInfo.city}"></span><span th:if="${curriculumData.personalInfo.city != null and curriculumData.personalInfo.state != null}">/</span><span class="state" th:text="${curriculumData.personalInfo.state}"></span>
     </p>
     <p>
-        <span class="marital-status" th:text="${curriculumData.personalInfo.maritalStatus}"></span><span th:if="${curriculumData.personalInfo.maritalStatus != null and curriculumData.personalInfo.age != null}">, </span><span class="age" th:text="${curriculumData.personalInfo.age != null ? curriculumData.personalInfo.age + ' anos' : ''}"></span>
+        <span class="marital-status" th:text="${curriculumData.personalInfo.maritalStatus}"></span><span>, </span><span class="age" th:text="${curriculumData.personalInfo.age + ' anos'}"></span>
     </p>
-    <p class="phone-number" th:text="${curriculumData.personalInfo.phoneNumber != null ? 'Telefone: ' + curriculumData.personalInfo.phoneNumber : ''}"></p>
-    <p class="email" th:text="${curriculumData.personalInfo.email != null ? 'E-mail: ' + curriculumData.personalInfo.email : ''}"></p>
+    <p class="phone-number" th:text="${'Telefone: ' + curriculumData.personalInfo.phoneNumber}"></p>
 </div>
 
 <h2 class="professional-goal">Objetivo Profissional</h2>
