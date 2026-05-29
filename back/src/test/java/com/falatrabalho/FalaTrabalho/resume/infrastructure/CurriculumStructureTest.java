@@ -78,7 +78,7 @@ class CurriculumStructureTest {
 	@Test
 	void shouldGenerateEducationListHtmlStructure() {
 		assertEquals("""
-				<h2 class="educational-background">Forma&ccedil;&atilde;o</h2>
+				<h2 class="educational-background">Formação</h2>
 				<div class="education">
 				    <p class="title">Ensino médio completo</p>
 				    <p>Escola Estadual Central</p>
@@ -117,7 +117,7 @@ class CurriculumStructureTest {
 	@Test
 	void shouldGenerateWorkExperienceListHtmlStructure() {
 		assertEquals("""
-				<h2 class="work-experience">Experi&ecirc;ncias Profissionais</h2>
+				<h2 class="work-experience">Experiências Profissionais</h2>
 
 				<div class="job">
 				    <p class="title">Mercado Bom Preço</p>
@@ -152,7 +152,7 @@ class CurriculumStructureTest {
 	@Test
 	void shouldGenerateComplementaryCourseListHtmlStructure() {
 		assertEquals("""
-				<h2 class="complementary">Qualifica&ccedil;&otilde;es e Cursos Complementares</h2>
+				<h2 class="complementary">Qualificações e Cursos Complementares</h2>
 
 				<div class="course">
 				    <p class="title">Informática básica</p>
@@ -199,7 +199,7 @@ class CurriculumStructureTest {
 	@Test
 	void shouldGenerateQualitiesListHtmlStructure() {
 		assertEquals("""
-				<h2 class="qualities">Principais Qualidades / Caracter&iacute;sticas</h2>
+				<h2 class="qualities">Principais Qualidades / Características</h2>
 				<ul>
 				    <li>Comunicação</li>
 				    <li>Pontualidade</li>

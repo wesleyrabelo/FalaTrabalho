@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
@@ -82,7 +82,7 @@
 <p th:text="${curriculumData.professionalSummary}"></p>
 
 <th:block th:if="${!curriculumData.education.isEmpty()}">
-<h2 class="educational-background">Forma&ccedil;&atilde;o</h2>
+<h2 class="educational-background">Formação</h2>
 <div class="education" th:each="education : ${curriculumData.education}">
     <p class="title" th:text="${education.title}"></p>
     <p th:text="${education.institution}"></p>
@@ -91,7 +91,7 @@
 </div>
 </th:block>
 
-<h2 class="work-experience">Experi&ecirc;ncias Profissionais</h2>
+<h2 class="work-experience">Experiências Profissionais</h2>
 
 <div class="job" th:each="job : ${curriculumData.workExperience}">
     <p class="title" th:text="${job.company}"></p>
@@ -101,7 +101,7 @@
 </div>
 
 <th:block th:if="${!curriculumData.complementaryCourses.isEmpty()}">
-<h2 class="complementary">Qualifica&ccedil;&otilde;es e Cursos Complementares</h2>
+<h2 class="complementary">Qualificações e Cursos Complementares</h2>
 
 <div class="course" th:each="course : ${curriculumData.complementaryCourses}">
     <p class="title" th:text="${course.title}"></p>
@@ -112,7 +112,7 @@
 </div>
 </th:block>
 
-<h2 class="qualities">Principais Qualidades / Caracter&iacute;sticas</h2>
+<h2 class="qualities">Principais Qualidades / Características</h2>
 <ul>
     <li th:each="quality : ${curriculumData.qualities}" th:text="${quality}"></li>
 </ul>
