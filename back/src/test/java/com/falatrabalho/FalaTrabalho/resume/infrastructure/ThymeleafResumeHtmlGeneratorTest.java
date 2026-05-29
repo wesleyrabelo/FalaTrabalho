@@ -1,0 +1,42 @@
+package com.falatrabalho.FalaTrabalho.resume.infrastructure;
+
+import com.falatrabalho.FalaTrabalho.resume.domain.HtmlDocument;
+import com.falatrabalho.FalaTrabalho.resume.support.CurriculumDataFixture;
+import org.junit.jupiter.api.Test;
+import org.thymeleaf.spring6.SpringTemplateEngine;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class ThymeleafResumeHtmlGeneratorTest {
+
+	private final ThymeleafResumeHtmlGenerator generator = new ThymeleafResumeHtmlGenerator(templateEngine());
+
+	@Test
+	void shouldGenerateHtmlDocumentFromCurriculumData() {
+		HtmlDocument htmlDocument = generator.generate(CurriculumDataFixture.complete());
+
+		assertFalse(htmlDocument.content().isBlank());
+		assertTrue(htmlDocument.content().contains("João da Silva"));
+		assertTrue(htmlDocument.content().contains("Resumo Profissional"));
+	}
+
+	@Test
+	void shouldNotGenerateHtmlDocumentWhenCurriculumDataIsNull() {
+		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> generator.generate(null));
+
+		assertEquals("Curriculum data must not be null", exception.getMessage());
+	}
+
+	private static SpringTemplateEngine templateEngine() {
+		ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+		templateResolver.setPrefix("templates/");
+		templateResolver.setSuffix(".html");
+		templateResolver.setTemplateMode("HTML");
+		templateResolver.setCharacterEncoding("UTF-8");
+
+		SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+		templateEngine.setTemplateResolver(templateResolver);
+		return templateEngine;
+	}
+}

@@ -1,180 +1,120 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Currículo</title>
-
+    <meta charset="UTF-8" />
+    <title>Curriculum</title>
     <style>
-        @page {
-            size: A4;
-            margin: 20mm;
-        }
-
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            color: #222;
-            font-size: 14px;
-            line-height: 1.5;
-            margin: 0;
+          font-family: Arial, sans-serif;
+          color: #222;
+          line-height: 1.5;
+          max-width: 800px;
+          margin: 40px auto;
+          padding: 0 30px;
         }
 
-        .resume {
-            width: 100%;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 25px;
-            border-bottom: 2px solid #222;
-            padding-bottom: 15px;
-        }
-
-        .header h1 {
-            margin: 0;
-            font-size: 28px;
-            text-transform: uppercase;
+        h1 {
+          text-align: center;
+          margin-bottom: 5px;
+          font-size: 28px;
+          letter-spacing: 1px;
         }
 
         .contact {
-            margin-top: 8px;
-            font-size: 13px;
-            color: #555;
+          text-align: left;
+          font-size: 16px;
+          margin-bottom: 30px;
+        }
+        .contact p {
+          margin: 2px 0;
         }
 
-        .section {
-            margin-bottom: 20px;
-        }
-
-        .section h2 {
-            font-size: 16px;
-            text-transform: uppercase;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 4px;
-            margin-bottom: 10px;
-        }
-
-        .item {
-            margin-bottom: 12px;
-        }
-
-        .item-title {
-            font-weight: bold;
-        }
-
-        .item-subtitle {
-            color: #555;
-            font-size: 13px;
+        h2 {
+          font-size: 18px;
+          border-bottom: 1px solid #333;
+          padding-bottom: 4px;
+          margin-top: 28px;
+          text-transform: uppercase;
         }
 
         ul {
-            margin: 6px 0 0 20px;
-            padding: 0;
+          padding-left: 20px;
+        }
+
+        li {
+          margin-bottom: 8px;
+        }
+
+        .job,
+        .course,
+        .education {
+          margin-bottom: 16px;
+        }
+
+        .title {
+          font-weight: bold;
+        }
+
+        .period {
+          font-style: italic;
         }
     </style>
 </head>
-
 <body>
-<div class="resume">
+<h1 class="name" th:text="${curriculumData.personalInfo.name}"></h1>
 
-    <div class="header">
-        <h1 th:text="${fullName}">Nome Completo</h1>
-
-        <div class="contact">
-            <span th:text="${phone}">(00) 00000-0000</span> |
-            <span th:text="${city}">Cidade - Estado</span> |
-            <span th:text="${age}">Idade</span>
-        </div>
-    </div>
-
-    <div class="section" th:if="${professionalSummary != null}">
-        <h2>Resumo Profissional</h2>
-        <p th:text="${professionalSummary}">
-            Breve resumo profissional.
-        </p>
-    </div>
-
-    <div class="section" th:if="${objective != null}">
-        <h2>Objetivo</h2>
-        <p th:text="${objective}">
-            Objetivo profissional.
-        </p>
-    </div>
-
-    <div class="section" th:if="${workExperiences != null}">
-        <h2>Experiência Profissional</h2>
-
-        <div class="item" th:each="experience : ${workExperiences}">
-            <div class="item-title" th:text="${experience.jobTitle}">
-                Cargo
-            </div>
-
-            <div class="item-subtitle">
-                <span th:text="${experience.companyName}">Empresa</span> |
-                <span th:text="${experience.startDate}">Início</span> -
-                <span th:text="${experience.endDate}">Fim</span>
-            </div>
-
-            <p th:text="${experience.description}">
-                Descrição da experiência.
-            </p>
-        </div>
-    </div>
-
-    <div class="section" th:if="${educations != null}">
-        <h2>Formação Acadêmica</h2>
-
-        <div class="item" th:each="education : ${educations}">
-            <div class="item-title" th:text="${education.courseName}">
-                Curso
-            </div>
-
-            <div class="item-subtitle">
-                <span th:text="${education.institutionName}">Instituição</span> |
-                <span th:text="${education.startDate}">Início</span> -
-                <span th:text="${education.endDate}">Fim</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="section" th:if="${skills != null}">
-        <h2>Habilidades</h2>
-
-        <ul>
-            <li th:each="skill : ${skills}" th:text="${skill}">
-                Habilidade
-            </li>
-        </ul>
-    </div>
-
-    <div class="section" th:if="${courses != null}">
-        <h2>Cursos e Certificações</h2>
-
-        <div class="item" th:each="course : ${courses}">
-            <div class="item-title" th:text="${course.name}">
-                Nome do curso
-            </div>
-
-            <div class="item-subtitle">
-                <span th:text="${course.institutionName}">Instituição</span>
-                <span th:if="${course.completionDate != null}"> | </span>
-                <span th:if="${course.completionDate != null}" th:text="${course.completionDate}">
-                    Data
-                </span>
-            </div>
-        </div>
-    </div>
-
-    <div class="section" th:if="${languages != null}">
-        <h2>Idiomas</h2>
-
-        <ul>
-            <li th:each="language : ${languages}">
-                <span th:text="${language.name}">Idioma</span> -
-                <span th:text="${language.level}">Nível</span>
-            </li>
-        </ul>
-    </div>
-
+<div class="contact">
+    <p>
+        <span class="city" th:text="${curriculumData.personalInfo.city}"></span><span th:if="${curriculumData.personalInfo.city != null and curriculumData.personalInfo.state != null}">/</span><span class="state" th:text="${curriculumData.personalInfo.state}"></span>
+    </p>
+    <p>
+        <span class="marital-status" th:text="${curriculumData.personalInfo.maritalStatus}"></span><span>, </span><span class="age" th:text="${curriculumData.personalInfo.age + ' anos'}"></span>
+    </p>
+    <p class="phone-number" th:text="${'Telefone: ' + curriculumData.personalInfo.phoneNumber}"></p>
 </div>
+
+<th:block th:if="${curriculumData.professionalGoal != null and !curriculumData.professionalGoal.isBlank()}">
+<h2 class="professional-goal">Objetivo Profissional</h2>
+<p th:text="${curriculumData.professionalGoal}"></p>
+</th:block>
+
+<h2 class="professional-summary">Resumo Profissional</h2>
+<p th:text="${curriculumData.professionalSummary}"></p>
+
+<th:block th:if="${!curriculumData.education.isEmpty()}">
+<h2 class="educational-background">Formação</h2>
+<div class="education" th:each="education : ${curriculumData.education}">
+    <p class="title" th:text="${education.title}"></p>
+    <p th:text="${education.institution}"></p>
+    <p th:text="${education.description}"></p>
+    <p class="period" th:text="${education.period}"></p>
+</div>
+</th:block>
+
+<h2 class="work-experience">Experiências Profissionais</h2>
+
+<div class="job" th:each="job : ${curriculumData.workExperience}">
+    <p class="title" th:text="${job.company}"></p>
+    <p class="position" th:text="${job.position}"></p>
+    <p class="period" th:text="${job.period}"></p>
+    <p class="description" th:text="${job.description}"></p>
+</div>
+
+<th:block th:if="${!curriculumData.complementaryCourses.isEmpty()}">
+<h2 class="complementary">Qualificações e Cursos Complementares</h2>
+
+<div class="course" th:each="course : ${curriculumData.complementaryCourses}">
+    <p class="title" th:text="${course.title}"></p>
+    <p th:text="${course.institution}"></p>
+    <p class="period" th:text="${course.period}"></p>
+    <p th:text="${course.workload}"></p>
+    <p class="description" th:text="${course.description}"></p>
+</div>
+</th:block>
+
+<h2 class="qualities">Principais Qualidades / Características</h2>
+<ul>
+    <li th:each="quality : ${curriculumData.qualities}" th:text="${quality}"></li>
+</ul>
 </body>
 </html>
