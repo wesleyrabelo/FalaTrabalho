@@ -7,6 +7,7 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class CurriculumStructureTest {
 
@@ -36,6 +37,22 @@ class CurriculumStructureTest {
 				<h2 class="professional-goal">Objetivo Profissional</h2>
 				<p>Atuar como auxiliar administrativo</p>
 				""".stripTrailing(), HtmlSections.professionalGoal(completeHtml).stripTrailing());
+	}
+
+	@Test
+	void shouldNotGenerateProfessionalGoalHtmlStructureWhenProfessionalGoalIsNull() {
+		String html = generator.generate(CurriculumDataFixture.withNullProfessionalGoal()).content();
+
+		assertFalse(html.contains("class=\"professional-goal\""));
+		assertFalse(html.contains("Objetivo Profissional"));
+	}
+
+	@Test
+	void shouldNotGenerateProfessionalGoalHtmlStructureWhenProfessionalGoalIsBlank() {
+		String html = generator.generate(CurriculumDataFixture.withBlankProfessionalGoal()).content();
+
+		assertFalse(html.contains("class=\"professional-goal\""));
+		assertFalse(html.contains("Objetivo Profissional"));
 	}
 
 	@Test
@@ -75,6 +92,14 @@ class CurriculumStructureTest {
 				    <p class="period">2018 - 2019</p>
 				</div>
 				""".stripTrailing(), HtmlSections.education(completeHtml).stripTrailing());
+	}
+
+	@Test
+	void shouldNotGenerateEducationHtmlStructureWhenEducationIsNull() {
+		String html = generator.generate(CurriculumDataFixture.withNullEducation()).content();
+
+		assertFalse(html.contains("class=\"educational-background\""));
+		assertFalse(html.contains("class=\"education\""));
 	}
 
 	@Test
@@ -152,6 +177,14 @@ class CurriculumStructureTest {
 	}
 
 	@Test
+	void shouldNotGenerateComplementaryCourseHtmlStructureWhenComplementaryCoursesIsNull() {
+		String html = generator.generate(CurriculumDataFixture.withNullComplementaryCourses()).content();
+
+		assertFalse(html.contains("class=\"complementary\""));
+		assertFalse(html.contains("class=\"course\""));
+	}
+
+	@Test
 	void shouldGenerateQualitiesListHtmlStructure() {
 		assertEquals("""
 				<h2 class="qualities">Principais Qualidades / Caracter&iacute;sticas</h2>
@@ -176,4 +209,3 @@ class CurriculumStructureTest {
 		return templateEngine;
 	}
 }
-

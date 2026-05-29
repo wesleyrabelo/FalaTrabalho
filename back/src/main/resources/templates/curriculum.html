@@ -73,12 +73,15 @@
     <p class="phone-number" th:text="${'Telefone: ' + curriculumData.personalInfo.phoneNumber}"></p>
 </div>
 
+<th:block th:if="${curriculumData.professionalGoal != null and !curriculumData.professionalGoal.isBlank()}">
 <h2 class="professional-goal">Objetivo Profissional</h2>
 <p th:text="${curriculumData.professionalGoal}"></p>
+</th:block>
 
 <h2 class="professional-summary">Resumo Profissional</h2>
 <p th:text="${curriculumData.professionalSummary}"></p>
 
+<th:block th:if="${!curriculumData.education.isEmpty()}">
 <h2 class="educational-background">Forma&ccedil;&atilde;o</h2>
 <div class="education" th:each="education : ${curriculumData.education}">
     <p class="title" th:text="${education.title}"></p>
@@ -86,6 +89,7 @@
     <p th:text="${education.description}"></p>
     <p class="period" th:text="${education.period}"></p>
 </div>
+</th:block>
 
 <h2 class="work-experience">Experi&ecirc;ncias Profissionais</h2>
 
@@ -96,6 +100,7 @@
     <p class="description" th:text="${job.description}"></p>
 </div>
 
+<th:block th:if="${!curriculumData.complementaryCourses.isEmpty()}">
 <h2 class="complementary">Qualifica&ccedil;&otilde;es e Cursos Complementares</h2>
 
 <div class="course" th:each="course : ${curriculumData.complementaryCourses}">
@@ -105,6 +110,7 @@
     <p th:text="${course.workload}"></p>
     <p class="description" th:text="${course.description}"></p>
 </div>
+</th:block>
 
 <h2 class="qualities">Principais Qualidades / Caracter&iacute;sticas</h2>
 <ul>

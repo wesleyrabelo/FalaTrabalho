@@ -35,6 +35,17 @@ public final class CurriculumDataFixture {
 				qualities());
 	}
 
+	public static CurriculumData withBlankProfessionalGoal() {
+		return new CurriculumData(
+				personalInfo(),
+				" ",
+				professionalSummary(),
+				education(),
+				workExperience(),
+				complementaryCourses(),
+				qualities());
+	}
+
 	public static CurriculumData withNullEducation() {
 		return new CurriculumData(
 				personalInfo(),
@@ -54,21 +65,6 @@ public final class CurriculumDataFixture {
 				education(),
 				workExperience(),
 				null,
-				qualities());
-	}
-
-	private static CurriculumData curriculumData(
-			List<Education> education,
-			List<WorkExperience> workExperience,
-			List<ComplementaryCourse> complementaryCourses) {
-
-		return new CurriculumData(
-				personalInfo(),
-				professionalGoal(),
-				professionalSummary(),
-				education,
-				workExperience,
-				complementaryCourses,
 				qualities());
 	}
 
