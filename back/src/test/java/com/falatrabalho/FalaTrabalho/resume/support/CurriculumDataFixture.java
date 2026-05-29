@@ -68,12 +68,45 @@ public final class CurriculumDataFixture {
 				qualities());
 	}
 
+	public static CurriculumData withEmptyEducation() {
+		return new CurriculumData(
+				personalInfo(),
+				professionalGoal(),
+				professionalSummary(),
+				List.of(),
+				workExperience(),
+				complementaryCourses(),
+				qualities());
+	}
+
 	public static CurriculumData withNullComplementaryCourses() {
 		return new CurriculumData(
 				personalInfo(),
 				professionalGoal(),
 				professionalSummary(),
 				education(),
+				workExperience(),
+				null,
+				qualities());
+	}
+
+	public static CurriculumData withEmptyComplementaryCourses() {
+		return new CurriculumData(
+				personalInfo(),
+				professionalGoal(),
+				professionalSummary(),
+				education(),
+				workExperience(),
+				List.of(),
+				qualities());
+	}
+
+	public static CurriculumData withoutOptionalFields() {
+		return new CurriculumData(
+				personalInfo(),
+				null,
+				professionalSummary(),
+				null,
 				workExperience(),
 				null,
 				qualities());
