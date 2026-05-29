@@ -1,7 +1,6 @@
 package com.falatrabalho.FalaTrabalho.resume.infrastructure;
 
 import com.falatrabalho.FalaTrabalho.resume.domain.HtmlDocument;
-import com.falatrabalho.FalaTrabalho.resume.domain.curriculum.WorkExperience;
 import com.falatrabalho.FalaTrabalho.resume.support.CurriculumDataFixture;
 import org.junit.jupiter.api.Test;
 import org.thymeleaf.spring6.SpringTemplateEngine;
@@ -22,6 +21,13 @@ class ThymeleafResumeHtmlGeneratorTest {
 		assertTrue(htmlDocument.content().contains("Resumo Profissional"));
 	}
 
+	@Test
+	void shouldNotGenerateHtmlDocumentWhenCurriculumDataIsNull() {
+		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> generator.generate(null));
+
+		assertEquals("Curriculum data must not be null", exception.getMessage());
+	}
+
 	private static SpringTemplateEngine templateEngine() {
 		ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
 		templateResolver.setPrefix("templates/");
@@ -34,4 +40,3 @@ class ThymeleafResumeHtmlGeneratorTest {
 		return templateEngine;
 	}
 }
-
