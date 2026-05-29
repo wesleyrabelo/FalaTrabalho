@@ -14,7 +14,14 @@ public final class CurriculumDataFixture {
 	}
 
 	public static CurriculumData complete() {
-		return curriculumData(education(), workExperience(), complementaryCourses());
+		return new CurriculumData(
+				personalInfo(),
+				professionalGoal(),
+				professionalSummary(),
+				education(),
+				workExperience(),
+				complementaryCourses(),
+				qualities());
 	}
 
 	public static CurriculumData withNullProfessionalGoal() {
