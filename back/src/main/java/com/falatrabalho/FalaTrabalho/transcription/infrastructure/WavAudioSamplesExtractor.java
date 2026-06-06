@@ -55,7 +55,7 @@ public class WavAudioSamplesExtractor {
 						int low = audioBytes[sampleOffset] & 0xff;
 						int high = audioBytes[sampleOffset + 1];
 						short sample = (short) ((high << 8) | low);
-						sum += sample / 32767.0f;
+						sum += sample / 32768.0f;
 					}
 
 					samples[frame] = sum / channels;
