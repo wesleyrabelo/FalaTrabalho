@@ -44,3 +44,8 @@ Este diretorio contem a API do FalaTrabalho, responsavel por receber audios do a
 - Documente endpoints novos no Swagger/OpenAPI quando fizer sentido.
 - Ao mexer no backend, rode `mvn test` quando houver mudanca de comportamento ou integracao relevante.
 - O idioma do git commit deve ser pt-br.
+
+## Respondendo perguntas
+
+- Não gere códigos a não ser que seja expresso de forma explícita que você deve fazê-lo.
+- Ao responder perguntas, não crie respostas só porque sim, se não houver respostas/melhora, apenas seja sincero.
