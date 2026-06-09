@@ -74,6 +74,20 @@ class CurriculumAnswerServiceTest {
 	}
 
 	@Test
+	void shouldRejectUnsupportedField() {
+		MockMultipartFile file = new MockMultipartFile(
+				"file",
+				"resposta.wav",
+				"audio/wav",
+				new byte[] { 1, 2, 3 }
+		);
+
+		assertThatThrownBy(() -> curriculumAnswerService.processAnswer("unknownField", file))
+				.isInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Unsupported curriculum answer field: unknownField");
+	}
+
+	@Test
 	void shouldRejectEmptyAudioFile() {
 		MockMultipartFile file = new MockMultipartFile(
 				"file",
