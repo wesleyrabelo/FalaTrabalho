@@ -22,9 +22,7 @@ public class CurriculumAnswerService {
 	}
 
 	public CurriculumAnswerResponse processAnswer(String field, MultipartFile file) {
-		if (field == null || field.isBlank()) {
-			throw new IllegalArgumentException("Field must not be blank");
-		}
+		CurriculumAnswerField answerField = CurriculumAnswerField.fromValue(field);
 		if (file == null || file.isEmpty()) {
 			throw new IllegalArgumentException("Audio file must not be empty");
 		}
@@ -34,7 +32,7 @@ public class CurriculumAnswerService {
 		String improvedText = textEnhancer.enhance(transcription.text());
 
 		return new CurriculumAnswerResponse(
-				field,
+				answerField.value(),
 				transcription.text(),
 				improvedText
 		);
