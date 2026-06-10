@@ -25,7 +25,7 @@ Todas as decisões de interface devem priorizar:
 - JavaScript
 - React Navigation
 - Axios
-- Expo AV (gravação de áudio)
+- expo-audio (gravação de áudio)
 
 ## Princípios de desenvolvimento
 
