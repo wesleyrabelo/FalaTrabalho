@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { getRecordingPermissionsAsync, requestRecordingPermissionsAsync } from 'expo-audio';
 
-import { AppButton } from '../components';
+import { AppButton, ErrorMessage } from '../components';
 import { colors, spacing, typography } from '../constants';
 
 const questions = [
@@ -64,10 +65,38 @@ const questions = [
 
 export function InterviewScreen({ navigation }) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [hasMicrophonePermission, setHasMicrophonePermission] = useState(false);
+  const [isCheckingPermission, setIsCheckingPermission] = useState(true);
+  const [permissionError, setPermissionError] = useState('');
 
   const currentQuestion = questions[currentQuestionIndex];
   const isFirstQuestion = currentQuestionIndex === 0;
   const isLastQuestion = currentQuestionIndex === questions.length - 1;
+
+  useEffect(() => {
+    async function checkMicrophonePermission() {
+      const permission = await getRecordingPermissionsAsync();
+
+      setHasMicrophonePermission(permission.granted);
+      setIsCheckingPermission(false);
+    }
+
+    checkMicrophonePermission();
+  }, []);
+
+  async function handleRequestMicrophonePermission() {
+    setPermissionError('');
+    setIsCheckingPermission(true);
+
+    const permission = await requestRecordingPermissionsAsync();
+
+    setHasMicrophonePermission(permission.granted);
+    setIsCheckingPermission(false);
+
+    if (!permission.granted) {
+      setPermissionError('Nao conseguimos acessar o microfone. Permita o uso para responder falando.');
+    }
+  }
 
   function handleNext() {
     if (isLastQuestion) {
@@ -85,6 +114,32 @@ export function InterviewScreen({ navigation }) {
     }
 
     setCurrentQuestionIndex((index) => index - 1);
+  }
+
+  if (!hasMicrophonePermission) {
+    return (
+      <View style={styles.container}>
+        <View style={styles.content}>
+          <Text style={styles.title}>Permitir microfone</Text>
+          <Text style={styles.help}>
+            Para criar seu curriculo, vamos gravar suas respostas durante a entrevista.
+          </Text>
+          <Text style={styles.help}>
+            O microfone sera usado apenas quando voce tocar para gravar.
+          </Text>
+          <ErrorMessage message={permissionError} />
+        </View>
+
+        <View style={styles.actions}>
+          <AppButton label="Voltar ao inicio" onPress={() => navigation.goBack()} />
+          <AppButton
+            disabled={isCheckingPermission}
+            label={isCheckingPermission ? 'Verificando...' : 'Permitir microfone'}
+            onPress={handleRequestMicrophonePermission}
+          />
+        </View>
+      </View>
+    );
   }
 
   return (
